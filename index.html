@@ -69,6 +69,12 @@ body {
     height: auto;
     border-radius: 50%;
     border: 2px solid #ffffff;
+    transition: all 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
 .content-section {
@@ -91,11 +97,13 @@ body {
     margin: 5px;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .button:hover {
     background-color: #333333;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .resume {
@@ -164,11 +172,135 @@ body {
     }
 }
 
+/* Canvas için stil ekleyelim */
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Container'ın arka planını şeffaf yapalım */
+.container {
+    background-color: rgba(30, 30, 30, 0.8); /* Yarı saydam arka plan */
+}
+
+.skills {
+    width: 100%;
+    padding: 20px;
+}
+
+.skill {
+    margin: 15px 0;
+}
+
+.skill-name {
+    color: #fff;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.skill-bar {
+    height: 10px;
+    background: #2a2a2a;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    background: linear-gradient(90deg, #4a90e2, #67b26f);
+    border-radius: 5px;
+    animation: fillBar 2s ease-out;
+}
+
+@keyframes fillBar {
+    from { width: 0; }
+}
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.project-card {
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-card h3 {
+    color: #fff;
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+.project-card p {
+    color: #ccc;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.project-stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.project-stats span {
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.project-tags {
+    margin: 10px 0;
+}
+
+.project-tags span {
+    background: rgba(74, 144, 226, 0.2);
+    color: #4a90e2;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.project-link {
+    display: inline-block;
+    color: #4a90e2;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+.project-link:hover {
+    color: #67b26f;
+}
+
 </style>
 </head>
 
 <body>
-
+    <!-- Canvas elementini body'nin en başına ekleyelim -->
+    <canvas id="particleCanvas"></canvas>
+    
     <div class="container">
         <div class="photo-section">
             <img src="foto.jpg" class="profile-photo">
@@ -183,16 +315,28 @@ body {
             <div class="resume" id="resume">
 
                 
-                    <h3 align="center" class="typewriter">Ben Fatih Gülcü <br> Bir Mobil Geliştirici</h3>
+                    <h3 align="center" class="typewriter">Ben Fatih Gülcü
+Bir Mobil Geliştirici</h3>
 
                     <p>
-                   Fırat Üniversitesi'nde Yazılım Mühendisliği okumaya başlamadan önce ,<br> Necmettin Erbakan Üniversitesi'nde Elektrik-Elektronik Mühendisliği eğitimi aldım. Bu eğitim, bana elektronik ve elektrik sistemleri konusunda sağlam bir temel kazandırdı.<br> Ayrıca, MT Otomasyon'da çalışarak elektrik ve otomasyon sistemleri üzerinde pratik deneyim edindim. <br> Bu deneyim, otomasyon teknolojileri, arıza giderme ve sistem entegrasyonu konularında <br> uygulamalı beceriler edinmemi sağladı. Elektrik mühendisliğinden yazılım geliştirmeye olan yolculuğum, <br> donanım ve yazılımın nasıl etkileşime girdiğine dair benzersiz bir bakış açısı <br> kazanmama ve problem çözme yeteneklerimi geliştirmeme yardımcı oldu. 
+                   Fırat Üniversitesi'nde Yazılım Mühendisliği okumaya başlamadan önce ,Necmettin Erbakan Üniversitesi'nde Elektrik-Elektronik Mühendisliği eğitimi aldım. Bu eğitim, bana elektronik ve elektrik sistemleri konusunda sağlam bir temel kazandırdı.<br> Ayrıca, MT Otomasyon'da çalışarak elektrik ve otomasyon sistemleri üzerinde pratik deneyim edindim. Bu deneyim, otomasyon teknolojileri, arıza giderme ve sistem entegrasyonu konularında uygulamalı beceriler edinmemi sağladı. Elektrik mühendisliğinden yazılım geliştirmeye olan yolculuğum, donanım ve yazılımın nasıl etkileşime girdiğine dair benzersiz bir bakış açısı kazanmama ve problem çözme yeteneklerimi geliştirmeme yardımcı oldu. 
                    </p>
                 <p>
                     <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=crowroser&theme=dark&show_icons=true&locale=tr&layout=compact" alt="crowroser"/>
                      </p>
             </div>
+            <div class="links">
+                
+                <a href="https://chat.whatsapp.com/DUW4mrykjICA6hwiWiOwbJ" class="button">KaWin Mobil Developer Whatsapp Grubu</a>
+                <a href="https://chat.whatsapp.com/GA4xBqzTVeO2bflH15hBea" class="button">AllOne Sohbet Whatsapp Grubu</a>
+                <a href="https://chat.whatsapp.com/FAKULTEMIZ_EDU_WHATSAPP_LINKI" class="button">Yazılım Mühendisliği Toplulukları Whatsapp Grubu</a>
+                <a href="allonetopluluğu.com" class="button">FÜ NOT PAYLAŞIM</a>
+            </div>
+            
+            <div class="projects"></div>
         </div>
+        
     </div>
+    
 </body>
 </html>
